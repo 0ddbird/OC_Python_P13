@@ -2,12 +2,25 @@ from django.shortcuts import render
 
 from lettings.models import Letting
 
+"""
+Lettings app views module.
+"""
+
 
 # Aenean leo magna, vestibulum et tincidunt fermentum, consectetur quis velit. Sed
 # non placerat massa. Integer est nunc, pulvinar a tempor et, bibendum id arcu.
 # Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia
 # curae; Cras eget scelerisque
 def lettings_index(request):
+    """
+    View function for displaying the index page of lettings.
+
+    Args:
+        request (HttpRequest): The HTTP request object.
+
+    Returns:
+        HttpResponse: The HTTP response object containing the rendered index.html template.
+    """
     lettings_list = Letting.objects.all()
     context = {"lettings_list": lettings_list}
     return render(request, "lettings/index.html", context)
@@ -25,6 +38,16 @@ def lettings_index(request):
 # Donec quis nisi ligula. Integer vehicula tincidunt enim, ac lacinia augue pulvinar
 # sit amet.
 def letting(request, letting_id):
+    """
+    View function for displaying a single letting.
+
+    Args:
+        request (HttpRequest): The HTTP request object.
+        letting_id (int): The ID of the letting to be displayed.
+
+    Returns:
+        HttpResponse: The HTTP response object containing the rendered letting template.
+    """
     letting = Letting.objects.get(id=letting_id)
     context = {
         "title": letting.title,

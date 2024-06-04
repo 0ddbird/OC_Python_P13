@@ -1,2 +1,3 @@
-
-# Create your tests here.
+"""
+Profile app tests module.
+"""

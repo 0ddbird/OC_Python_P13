@@ -1,3 +1,6 @@
 black
 ruff
 isort
+django-extensions
+ipython
+Django==3.0

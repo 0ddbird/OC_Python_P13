@@ -1,2 +1,3 @@
-
-# Create your tests here.
+"""
+Lettings app tests module.
+"""
