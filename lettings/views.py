@@ -1,3 +1,4 @@
+from django.http import Http404
 from django.shortcuts import render
 
 from lettings.models import Letting
@@ -48,7 +49,11 @@ def letting(request, letting_id):
     Returns:
         HttpResponse: The HTTP response object containing the rendered letting template.
     """
-    letting = Letting.objects.get(id=letting_id)
+    try:
+        letting = Letting.objects.get(id=letting_id)
+    except Letting.DoesNotExist:
+        raise Http404("Letting matching query does not exist.")
+
     context = {
         "title": letting.title,
         "address": letting.address,

@@ -1,6 +1,5 @@
 from django.apps import AppConfig
 
-
 """
 Lettings app apps module.
 """
