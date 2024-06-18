@@ -18,9 +18,9 @@ class LettingsIndexTestCase(TestCase):
         """
         Set up the test environment before each test case.
 
-        This method is called before each test case to set up any necessary objects or variables.
-        In this case, it initializes a RequestFactory, sets the URL for the "lettings_index" view,
-        and creates two Letting objects for testing purposes.
+        This method is called before each test case to set up any necessary objects
+        or variables. In this case, it initializes a RequestFactory, sets the URL for
+        the "lettings_index" view, and creates two Letting objects for testing purposes.
         """
         self.factory = RequestFactory()
         self.url = reverse("lettings_index")
@@ -51,11 +51,12 @@ class LettingsIndexTestCase(TestCase):
         """
         Test case for the lettings_index view.
 
-        This test verifies that the lettings_index view returns a response with status code 200,
-        uses the correct template, and contains the expected content.
+        This test verifies that the lettings_index view returns a response with
+        status code 200, uses the correct template, and contains the expected content.
 
-        It creates a GET request using the test client's factory, calls the lettings_index view
-        using the Django test Client, and then asserts various conditions on the response.
+        It creates a GET request using the test client's factory, calls the
+        lettings_index view using the Django test Client, and then asserts various
+        conditions on the response.
 
         Assertions:
         - The response status code should be 200.
@@ -74,9 +75,9 @@ class LettingsIndexTestCase(TestCase):
         """
         Test case for the letting view.
 
-        This method tests the behavior of the letting view by making a GET request to the '/lettings/1' URL
-        and asserting that the response status code is 200 (OK). It also checks if the response contains
-        the letting's title and address.
+        This method tests the behavior of the letting view by making a GET request to
+        the '/lettings/1' URL and asserting that the response status code is 200 (
+        OK). It also checks if the response contains the letting's title and address.
 
         """
         request = self.factory.get("/lettings/1")

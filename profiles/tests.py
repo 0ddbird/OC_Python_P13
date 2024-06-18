@@ -26,7 +26,8 @@ class ProfileModelTest(TestCase):
         """
         Test the string representation of the Profile model.
 
-        The string representation of the Profile model should be equal to the username of the associated User model.
+        The string representation of the Profile model should be equal to the
+        username of the associated User model.
         """
         self.assertEqual(str(self.profile), self.user.username)
 
@@ -40,6 +41,7 @@ class ProfileModelTest(TestCase):
         """
         Test case to verify the favorite city of a profile.
 
-        It checks if the favorite city of the profile matches the expected value "New York".
+        It checks if the favorite city of the profile matches the expected value "New
+        York".
         """
         self.assertEqual(self.profile.favorite_city, "New York")
