@@ -7,6 +7,8 @@ RUN pip install --no-cache-dir -r requirements.txt
 
 COPY . .
 
+RUN pip install gunicorn
+
 ENV DJANGO_SETTINGS_MODULE=oc_lettings_site.settings
 EXPOSE 8000
 
