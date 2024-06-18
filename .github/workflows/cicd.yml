@@ -46,14 +46,20 @@ jobs:
       - name: Check coverage threshold
         run: |
           coverage report --fail-under=80
-
+      
+      - name: Upload codebase artifact
+        uses: actions/upload-artifact@v4
+        with:
+          path: .
+          name: codebase
   cd:
       needs: ci
       runs-on: ubuntu-latest
       steps:
-        - name: Checkout code
-          uses: actions/checkout@v4
-
+        - name: Download codebase artifact
+          uses: actions/download-artifact@v4
+          with:
+            name: codebase
         - name: Set up Docker Buildx
           uses: docker/setup-buildx-action@v3
 
