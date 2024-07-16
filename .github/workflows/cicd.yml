@@ -89,7 +89,6 @@ jobs:
           push: true
           tags: |
             ${{ secrets.DOCKER_USERNAME }}/mydjangoapp:${{ github.sha }}
-            ${{ secrets.DOCKER_USERNAME }}/mydjangoapp:latest
 
       - name: Provision docker-compose.yml
         uses: appleboy/scp-action@v0.1.3
@@ -101,29 +100,6 @@ jobs:
           source: "docker-compose.yml"
           target: "$HOME/app/"
           overwrite: true
-
-      - name: Provision Caddyfile
-        uses: appleboy/scp-action@v0.1.3
-        with:
-          host: ${{ secrets.VPS_HOST }}
-          username: ${{ secrets.VPS_USERNAME }}
-          key: ${{ secrets.VPS_PRIVATE_KEY }}
-          port: ${{ secrets.VPS_PORT }}
-          source: "Caddyfile"
-          target: "$HOME"
-          overwrite: true
-
-      - name: Move Caddyfile to /etc/caddy
-        uses: appleboy/ssh-action@v1.0.3
-        with:
-          host: ${{ secrets.VPS_HOST }}
-          username: ${{ secrets.VPS_USERNAME }}
-          key: ${{ secrets.VPS_PRIVATE_KEY }}
-          port: ${{ secrets.VPS_PORT }}
-          script: |
-            sudo mv $HOME/Caddyfile /etc/caddy/Caddyfile
-            sudo chown root:root /etc/caddy/Caddyfile
-            sudo chmod 644 /etc/caddy/Caddyfile
 
       - name: Write .env file
         uses: appleboy/ssh-action@v1.0.3
@@ -137,7 +113,6 @@ jobs:
             echo "SECRET_KEY=${{ secrets.SECRET_KEY }}" >> $HOME/app/.env
             echo "SENTRY_DSN=${{ secrets.SENTRY_DSN }}" >> $HOME/app/.env
             echo "DJANGO_ALLOWED_HOSTS=${{ secrets.DJANGO_ALLOWED_HOSTS }}" >> $HOME/app/.env
-          
 
       - name: Deploy to VPS using Docker Compose
         uses: appleboy/ssh-action@v1.0.3
@@ -151,4 +126,3 @@ jobs:
             sudo docker-compose pull
             sudo docker-compose up -d --remove-orphans
 
-            
