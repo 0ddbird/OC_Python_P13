@@ -1,8 +1,0 @@
-version: '3'
-
-services:
-  django:
-    image: 0ddbird/mydjangoapp:$COMMIT_SHA
-    container_name: django
-    environment:
-      - DJANGO_SETTINGS_MODULE=oc_lettings_site.settings
