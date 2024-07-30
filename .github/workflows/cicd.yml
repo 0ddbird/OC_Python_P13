@@ -35,6 +35,11 @@ jobs:
           echo "SECRET_KEY='${{ secrets.SECRET_KEY }}'" > .env
           echo "SENTRY_DSN='${{ secrets.SENTRY_DSN }}'" >> .env
           echo "DJANGO_ALLOWED_HOSTS='${{ secrets.DJANGO_ALLOWED_HOSTS }}'" >> .env
+  
+      - name: Collect static files
+        run: |
+          source .env
+          python manage.py collectstatic --noinput
 
       - name: Run linting
         run: |

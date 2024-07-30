@@ -4,3 +4,4 @@ pytest-django==3.9.0
 sentry-sdk[django]
 django-extensions
 django-environ
+whitenoise
