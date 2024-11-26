@@ -1,0 +1,55 @@
+# .github/workflows/ci.yml
+name: CI Job
+
+on:
+  workflow_call:
+jobs:
+  ci:
+    runs-on: ubuntu-latest
+
+    env:
+      DJANGO_SETTINGS_MODULE: "oc_lettings_site.settings"
+      DATABASE_URL: "sqlite:///oc-lettings-site.sqlite3"
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11.8'
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements/requirements.txt
+
+      - name: Write .env file
+        run: |
+          echo "SECRET_KEY='${{ secrets.SECRET_KEY }}'" > .env
+          echo "SENTRY_DSN='${{ secrets.SENTRY_DSN }}'" >> .env
+          echo "DJANGO_ALLOWED_HOSTS='${{ secrets.DJANGO_ALLOWED_HOSTS }}'" >> .env
+
+      - name: Run linting
+        run: |
+          pip install flake8
+          flake8 .
+
+      - name: Run tests with coverage
+        run: |
+          pip install coverage
+          coverage run manage.py test
+          coverage report
+          coverage xml
+        continue-on-error: true
+
+      - name: Check coverage threshold
+        run: |
+          coverage report --fail-under=80
+
+      - name: Upload codebase artifact
+        uses: actions/upload-artifact@v4
+        with:
+          path: .
+          name: codebase
