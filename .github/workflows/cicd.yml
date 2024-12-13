@@ -118,3 +118,10 @@ jobs:
           port: ${{ secrets.VPS_PORT }}
           script: |
             docker pull ${{ secrets.DOCKER_USERNAME }}/mydjangoapp:${{ github.sha }}
+            docker ps -q --filter "ancestor=${{ secrets.DOCKER_USERNAME }}/mydjangoapp" | xargs -r docker stop
+            docker rm -f mydjangoapp || true
+            docker run -d \
+            --name mydjangoapp \
+            -p 8000:8000 \
+            --env-file $HOME/app/.env \
+            ${{ secrets.DOCKER_USERNAME }}/mydjangoapp:${{ github.sha }}
