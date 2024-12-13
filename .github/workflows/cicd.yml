@@ -104,7 +104,6 @@ jobs:
           key: ${{ secrets.VPS_PRIVATE_KEY }}
           port: ${{ secrets.VPS_PORT }}
           script: |
-            echo "COMMIT_SHA=${{ github.sha }}" > $HOME/app/.env
             echo "DOCKER_USERNAME=${{ secrets.DOCKER_USERNAME }}" >> $HOME/app/.env
             echo "SECRET_KEY=${{ secrets.SECRET_KEY }}" >> $HOME/app/.env
             echo "SENTRY_DSN=${{ secrets.SENTRY_DSN }}" >> $HOME/app/.env
@@ -117,11 +116,11 @@ jobs:
           key: ${{ secrets.VPS_PRIVATE_KEY }}
           port: ${{ secrets.VPS_PORT }}
           script: |
-            docker pull ${{ secrets.DOCKER_USERNAME }}/mydjangoapp:${{ github.sha }}
+            docker pull ${{ secrets.DOCKER_USERNAME }}/mydjangoapp
             docker ps -q --filter "ancestor=${{ secrets.DOCKER_USERNAME }}/mydjangoapp" | xargs -r docker stop
             docker rm -f mydjangoapp || true
             docker run -d \
             --name mydjangoapp \
             -p 8000:8000 \
             --env-file $HOME/app/.env \
-            ${{ secrets.DOCKER_USERNAME }}/mydjangoapp:${{ github.sha }}
+            ${{ secrets.DOCKER_USERNAME }}/mydjangoapp
