@@ -1,11 +1,3 @@
-.. module:: models
-   :synopsis: Django models for address and letting.
-
-.. automodule:: models
-   :members:
-   :undoc-members:
-   :show-inheritance:
-
 Address Model
 =============
 
@@ -31,6 +23,8 @@ Address Model
    Methods:
        __str__(): Returns a formatted string of the address.
 
+.. _letting-model:
+
 Letting Model
 =============
 
@@ -39,6 +33,9 @@ Letting Model
    :undoc-members:
    :show-inheritance:
    :exclude-members: __str__
+
+   Represents a letting in the system.
+
 
    Represents a letting in the system.
 
