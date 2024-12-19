@@ -10,6 +10,14 @@ Welcome to Orange County Lettings's documentation!
    :maxdepth: 2
    :caption: Contents:
 
+Contents
+--------
+
+.. toctree::
+
+   Home <self>
+   Address
+   Letting
 
 
 Indices and tables
