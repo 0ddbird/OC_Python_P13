@@ -1,10 +1,11 @@
-.. module:: lettings.models
-   :synopsis: Lettings model.
-
 Letting Model
 =============
 
-.. autoclass:: lettings.models.Letting
-   :members:
-   :undoc-members:
-   :show-inheritance:
+Represents a letting in the system.
+
+Attributes:
+   title (str): Character field for letting title.
+   address (Address): One-to-one relationship with Address.
+
+Methods:
+   __str__(): Returns the title of the letting.
